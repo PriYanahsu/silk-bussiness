@@ -1,24 +1,16 @@
 import { useState } from 'react';
-import { Heart, MessageCircle, Star, CheckCircle, XCircle, Edit, Trash2, EyeOff, Eye as EyeIcon } from 'lucide-react';
+import { Heart, MessageCircle, Star, CheckCircle, XCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import PreorderModal from './PreorderModal';
 import type { SilkThread } from '../types';
 
 interface ThreadCardProps {
   thread: SilkThread;
-  isOwner: boolean;
-  onUpdateThread: (id: string, updates: Partial<SilkThread>) => void;
-  onDeleteThread: (id: string) => void;
-  onToggleStatus: (id: string) => void;
   onAddPreorder: (preorderData: any) => void;
   viewMode: 'grid' | 'list';
 }
 
 const ThreadCard: React.FC<ThreadCardProps> = ({ 
   thread, 
-  isOwner, 
-  onUpdateThread, 
-  onDeleteThread, 
-  onToggleStatus, 
   onAddPreorder, 
   viewMode 
 }) => {
@@ -45,9 +37,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
   if (viewMode === 'list') {
     return (
       <div className={`thread-card ${!thread.inStock ? 'opacity-60' : ''} ${!thread.isActive ? 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900' : ''}`}>
-        <div className="flex flex-col sm:flex-row gap-6">
-          {/* Image */}
-          <div className="relative w-full sm:w-64 h-64 sm:h-48 flex-shrink-0">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+          {/* Image - Mobile Optimized */}
+          <div className="relative w-full sm:w-64 h-48 sm:h-48 flex-shrink-0">
             <img
               src={thread.images[currentImageIndex]}
               alt={thread.name}
@@ -69,13 +61,13 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
                   onClick={prevImage}
                   className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-1 transition-all duration-200"
                 >
-                  <EyeIcon className="h-4 w-4" />
+                  <ChevronLeft className="h-4 w-4" />
                 </button>
                 <button
                   onClick={nextImage}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-1 transition-all duration-200"
                 >
-                  <EyeIcon className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4" />
                 </button>
               </>
             )}
@@ -145,40 +137,13 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
               </div>
               
               <div className="flex items-center space-x-2">
-                {isOwner ? (
-                  <>
-                    <button
-                      onClick={() => onToggleStatus(thread.id)}
-                      className={`p-2 rounded-lg transition-colors duration-200 ${
-                        thread.isActive 
-                          ? 'bg-green-100 text-green-700 hover:bg-green-200' 
-                          : 'bg-red-100 text-red-700 hover:bg-red-200'
-                      }`}
-                    >
-                      {thread.isActive ? <EyeIcon className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-                    </button>
-                    <button
-                      onClick={() => onUpdateThread(thread.id, {})}
-                      className="p-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors duration-200"
-                    >
-                      <Edit className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => onDeleteThread(thread.id)}
-                      className="p-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors duration-200"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={handlePreorder}
-                    className="btn-primary flex items-center space-x-2"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    <span>Preorder</span>
-                  </button>
-                )}
+                <button
+                  onClick={handlePreorder}
+                  className="btn-primary flex items-center space-x-2"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  <span>Preorder</span>
+                </button>
               </div>
             </div>
           </div>
@@ -189,8 +154,8 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
 
   return (
     <div className={`thread-card ${!thread.inStock ? 'opacity-60' : ''} ${!thread.isActive ? 'border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900' : ''}`}>
-      {/* Image */}
-      <div className="relative h-64 overflow-hidden rounded-t-xl">
+      {/* Image - Mobile Optimized */}
+      <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden rounded-t-xl">
         <img
           src={thread.images[currentImageIndex]}
           alt={thread.name}
@@ -210,22 +175,22 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
           <>
             <button
               onClick={prevImage}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 bg-opacity-80 hover:bg-opacity-100 rounded-full p-1 transition-all duration-200"
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 active:bg-opacity-100 rounded-full p-2 transition-all duration-200 touch-manipulation"
             >
-              <EyeIcon className="h-4 w-4" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
             <button
               onClick={nextImage}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 bg-opacity-80 hover:bg-opacity-100 rounded-full p-1 transition-all duration-200"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 active:bg-opacity-100 rounded-full p-2 transition-all duration-200 touch-manipulation"
             >
-              <EyeIcon className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </>
         )}
         <button
           onClick={toggleWishlist}
-          className={`absolute top-2 right-2 p-2 rounded-full transition-colors duration-200 ${
-            isWishlisted ? 'text-red-500 bg-white dark:bg-gray-800' : 'text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 bg-opacity-80 hover:bg-opacity-100'
+          className={`absolute top-2 right-2 p-2 rounded-full transition-colors duration-200 touch-manipulation ${
+            isWishlisted ? 'text-red-500 bg-white dark:bg-gray-800' : 'text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 bg-opacity-90 hover:bg-opacity-100 active:bg-opacity-100'
           }`}
         >
           <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-current' : ''}`} />
@@ -237,17 +202,17 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
         )}
       </div>
 
-      {/* Content */}
-      <div className="p-4">
+      {/* Content - Mobile Optimized */}
+      <div className="p-3 sm:p-4">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-1">{thread.name}</h3>
-          <div className="flex items-center space-x-1">
-            <Star className="h-4 w-4 text-gold-500 fill-current" />
-            <span className="text-sm text-gray-600 dark:text-gray-300">{thread.rating}</span>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100 line-clamp-1 flex-1 mr-2">{thread.name}</h3>
+          <div className="flex items-center space-x-1 flex-shrink-0">
+            <Star className="h-3 w-3 sm:h-4 sm:w-4 text-gold-500 fill-current" />
+            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{thread.rating}</span>
           </div>
         </div>
 
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">{thread.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3 line-clamp-2">{thread.description}</p>
 
         <div className="flex flex-wrap gap-1 mb-3">
           {thread.tags.slice(0, 2).map((tag) => (
@@ -262,9 +227,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
 
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-silk-600 dark:text-silk-400">₹{thread.price.toLocaleString()}</span>
+            <span className="text-lg sm:text-xl font-bold text-silk-600 dark:text-silk-400">₹{thread.price.toLocaleString()}</span>
             {thread.originalPrice && (
-              <span className="text-sm text-gray-400 dark:text-gray-500 line-through">
+              <span className="text-xs sm:text-sm text-gray-400 dark:text-gray-500 line-through">
                 ₹{thread.originalPrice.toLocaleString()}
               </span>
             )}
@@ -272,10 +237,12 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
         </div>
 
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">
+          <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
             <span>{thread.weight}</span>
-            <span>• {thread.origin}</span>
-            <span>• {thread.quality}</span>
+            <span>•</span>
+            <span>{thread.origin}</span>
+            <span>•</span>
+            <span>{thread.quality}</span>
           </div>
         </div>
 
@@ -283,51 +250,24 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
           <div className="flex items-center space-x-1">
             {thread.inStock ? (
               <>
-                <CheckCircle className="h-4 w-4 text-green-500" />
+                <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />
                 <span className="text-xs text-green-600 dark:text-green-400">In Stock</span>
               </>
             ) : (
               <>
-                <XCircle className="h-4 w-4 text-red-500" />
+                <XCircle className="h-3 w-3 sm:h-4 sm:w-4 text-red-500" />
                 <span className="text-xs text-red-600 dark:text-red-400">Out of Stock</span>
               </>
             )}
           </div>
           
-          {isOwner ? (
-            <div className="flex items-center space-x-1">
-              <button
-                onClick={() => onToggleStatus(thread.id)}
-                className={`p-1 rounded transition-colors duration-200 ${
-                  thread.isActive 
-                    ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-800' 
-                    : 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-800'
-                }`}
-              >
-                {thread.isActive ? <EyeIcon className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
-              </button>
-              <button
-                onClick={() => onUpdateThread(thread.id, {})}
-                className="p-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors duration-200"
-              >
-                <Edit className="h-3 w-3" />
-              </button>
-              <button
-                onClick={() => onDeleteThread(thread.id)}
-                className="p-1 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded hover:bg-red-200 dark:hover:bg-red-800 transition-colors duration-200"
-              >
-                <Trash2 className="h-3 w-3" />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={handlePreorder}
-              className="btn-primary text-sm px-4 py-2 flex items-center space-x-1"
-            >
-              <MessageCircle className="h-4 w-4" />
-              <span>Preorder</span>
-            </button>
-          )}
+          <button
+            onClick={handlePreorder}
+            className="btn-primary text-xs sm:text-sm px-3 sm:px-4 py-2 flex items-center space-x-1 touch-manipulation"
+          >
+            <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span>Preorder</span>
+          </button>
         </div>
       </div>
       

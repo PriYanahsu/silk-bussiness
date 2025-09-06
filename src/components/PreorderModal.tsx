@@ -28,8 +28,8 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Get current user info if logged in
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    // Get current user info if logged in (static site - no user system)
+    const currentUser = null;
     
     onAddPreorder({
       productId: thread.id,

@@ -7,198 +7,24 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { ThemeProvider } from './contexts/ThemeContext';
 import type { SilkThread } from './types';
-
-// Sample data - in production, this would come from an API
-const sampleThreads: SilkThread[] = [
-  {
-    id: '1',
-    name: 'Premium Silkyarn - Natural White',
-    description: 'High-quality silk yarn perfect for traditional weaving and embroidery. Superior luster and strength for professional applications.',
-    price: 2500,
-    originalPrice: 3000,
-    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop',
-    images: [
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop'
-    ],
-    category: 'silkyarn',
-    color: 'Natural White',
-    weight: '20/22',
-    origin: 'India',
-    quality: 'A+',
-    inStock: true,
-    stockQuantity: 50,
-    rating: 4.8,
-    reviews: 24,
-    tags: ['premium', 'silkyarn', 'weaving'],
-    featured: true,
-    isActive: true,
-    createdAt: new Date('2024-01-15'),
-    updatedAt: new Date('2024-01-15')
-  },
-  {
-    id: '2',
-    name: 'Poly Yarn - Multi Color',
-    description: 'Durable poly yarn suitable for modern textile applications. Available in various colors and weights for different manufacturing needs.',
-    price: 1800,
-    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop',
-    images: [
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop'
-    ],
-    category: 'poly',
-    color: 'Multi Color',
-    weight: '13/15',
-    origin: 'India',
-    quality: 'A',
-    inStock: true,
-    stockQuantity: 30,
-    rating: 4.6,
-    reviews: 18,
-    tags: ['poly', 'modern', 'durable'],
-    featured: true,
-    isActive: true,
-    createdAt: new Date('2024-01-20'),
-    updatedAt: new Date('2024-01-20')
-  },
-  {
-    id: '3',
-    name: 'Decorative Zari - Golden',
-    description: 'Premium quality zari thread for embellishments and decorative work. Perfect for traditional Indian textiles and embroidery.',
-    price: 3200,
-    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop',
-    images: [
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop'
-    ],
-    category: 'zari',
-    color: 'Golden',
-    weight: '8/10',
-    origin: 'India',
-    quality: 'A+',
-    inStock: true,
-    stockQuantity: 25,
-    rating: 4.9,
-    reviews: 31,
-    tags: ['zari', 'decorative', 'golden'],
-    featured: true,
-    isActive: true,
-    createdAt: new Date('2024-01-10'),
-    updatedAt: new Date('2024-01-10')
-  },
-  {
-    id: '4',
-    name: 'Cottonyarn - Natural',
-    description: 'High-quality cotton yarn for various textile applications. Soft, durable, and perfect for everyday use in weaving and knitting.',
-    price: 1200,
-    image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop',
-    images: [
-      'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=600&fit=crop'
-    ],
-    category: 'cottonyarn',
-    color: 'Natural',
-    weight: '15/17',
-    origin: 'India',
-    quality: 'A',
-    inStock: true,
-    stockQuantity: 40,
-    rating: 4.7,
-    reviews: 15,
-    tags: ['cottonyarn', 'natural', 'soft'],
-    featured: false,
-    isActive: true,
-    createdAt: new Date('2024-01-25'),
-    updatedAt: new Date('2024-01-25')
-  }
-];
+import { products } from './data/products';
 
 function App() {
-  const [threads, setThreads] = useState<SilkThread[]>(sampleThreads);
-  const [filteredThreads, setFilteredThreads] = useState<SilkThread[]>(sampleThreads);
-  const [isOwner, setIsOwner] = useState(false);
-  const [isUser, setIsUser] = useState(false);
-  const [currentUser, setCurrentUser] = useState<string | null>(null);
-  const [preorders, setPreorders] = useState<any[]>([]);
+  const [filteredThreads, setFilteredThreads] = useState<SilkThread[]>(products);
 
   useEffect(() => {
-    // Only show active threads to customers
-    const activeThreads = isOwner ? threads : threads.filter(thread => thread.isActive);
+    // Show all active threads for static site
+    const activeThreads = products.filter(thread => thread.isActive);
     setFilteredThreads(activeThreads);
-  }, [threads, isOwner]);
-
-  const handleLogin = (user: { username: string; role: 'user' | 'owner'; email?: string; phone?: string }) => {
-    setCurrentUser(user.username);
-    
-    // Store user info in localStorage for preorders
-    localStorage.setItem('currentUser', JSON.stringify({
-      username: user.username,
-      email: user.email || '',
-      phone: user.phone || '',
-      role: user.role
-    }));
-    
-    if (user.role === 'owner') {
-      setIsOwner(true);
-      setIsUser(false);
-    } else {
-      setIsUser(true);
-      setIsOwner(false);
-    }
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    setIsOwner(false);
-    setIsUser(false);
-    localStorage.removeItem('currentUser');
-  };
-
-  const addThread = (thread: Omit<SilkThread, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const newThread: SilkThread = {
-      ...thread,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setThreads(prev => [...prev, newThread]);
-  };
-
-  const updateThread = (id: string, updates: Partial<SilkThread>) => {
-    setThreads(prev => prev.map(thread => 
-      thread.id === id 
-        ? { ...thread, ...updates, updatedAt: new Date() }
-        : thread
-    ));
-  };
-
-  const deleteThread = (id: string) => {
-    setThreads(prev => prev.filter(thread => thread.id !== id));
-  };
-
-  const toggleThreadStatus = (id: string) => {
-    setThreads(prev => prev.map(thread => 
-      thread.id === id 
-        ? { ...thread, isActive: !thread.isActive, updatedAt: new Date() }
-        : thread
-    ));
-  };
+  }, []);
 
   const addPreorder = (preorderData: any) => {
-    const newPreorder = {
-      ...preorderData,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-      status: 'pending' as const,
-    };
-    setPreorders(prev => [...prev, newPreorder]);
-  };
-
-  const updatePreorderStatus = (id: string, status: 'pending' | 'confirmed' | 'cancelled') => {
-    setPreorders(prev => prev.map(preorder => 
-      preorder.id === id ? { ...preorder, status } : preorder
-    ));
+    // Static site - just log the preorder
+    console.log('Preorder request:', preorderData);
   };
 
   const filterThreads = (filters: any) => {
-    let filtered = isOwner ? threads : threads.filter(thread => thread.isActive);
+    let filtered = products.filter(thread => thread.isActive);
 
     // Apply category filter
     if (filters.category && filters.category !== 'all') {
@@ -264,30 +90,12 @@ function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 thread-pattern">
-        <Header 
-          isOwner={isOwner}
-          isUser={isUser}
-          currentUser={currentUser}
-          onLogin={handleLogin}
-          onLogout={handleLogout}
-          preorderCount={preorders.length}
-          threads={threads}
-          preorders={preorders}
-          onUpdateThread={updateThread}
-          onDeleteThread={deleteThread}
-          onToggleStatus={toggleThreadStatus}
-          onUpdatePreorderStatus={updatePreorderStatus}
-        />
+        <Header />
         <main>
           <Hero />
           <About />
           <ProductGallery 
             threads={filteredThreads}
-            isOwner={isOwner}
-            onAddThread={addThread}
-            onUpdateThread={updateThread}
-            onDeleteThread={deleteThread}
-            onToggleStatus={toggleThreadStatus}
             onAddPreorder={addPreorder}
             onFilter={filterThreads}
           />

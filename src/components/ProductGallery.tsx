@@ -1,105 +1,75 @@
 import { useState } from 'react';
 import ThreadCard from './ThreadCard';
 import ThreadFilter from './ThreadFilter';
-import AddThreadModal from './AddThreadModal';
 import type { SilkThread } from '../types';
-import { Filter, Grid, List, Plus } from 'lucide-react';
+import { productCategories } from '../data/products';
+import { Filter, Grid, List } from 'lucide-react';
 
 interface ProductGalleryProps {
   threads: SilkThread[];
-  isOwner: boolean;
-  onAddThread: (thread: Omit<SilkThread, 'id' | 'createdAt' | 'updatedAt'>) => void;
-  onUpdateThread: (id: string, updates: Partial<SilkThread>) => void;
-  onDeleteThread: (id: string) => void;
-  onToggleStatus: (id: string) => void;
   onAddPreorder: (preorderData: any) => void;
   onFilter: (filters: any) => void;
 }
 
 const ProductGallery: React.FC<ProductGalleryProps> = ({ 
   threads, 
-  isOwner, 
-  onAddThread, 
-  onUpdateThread, 
-  onDeleteThread, 
-  onToggleStatus, 
   onAddPreorder, 
   onFilter 
 }) => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false);
 
-  const categories = [
-    { value: 'all', label: 'All Threads' },
-    { value: 'mulberry', label: 'Mulberry' },
-    { value: 'tussar', label: 'Tussar' },
-    { value: 'eri', label: 'Eri' },
-    { value: 'muga', label: 'Muga' },
-    { value: 'raw', label: 'Raw Silk' },
-    { value: 'dyed', label: 'Dyed Silk' },
-    { value: 'specialty', label: 'Specialty' },
-  ];
+  const categories = productCategories;
 
   const colors = [
     'all', 'white', 'golden', 'cream', 'yellow', 'red', 'blue', 'green', 'black', 'brown'
   ];
 
   return (
-    <section id="products" className="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-4">
-            Our Silk Thread Collection
+    <section id="products" className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        {/* Header - Mobile Optimized */}
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4">
+            Our Yarn Collection
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Discover our carefully curated collection of premium silk threads, 
-            each imported from their countries of origin for the highest quality.
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4">
+            Discover our comprehensive collection of premium yarns including Raw Silk, 
+            Ghicha Tusser, Polyester, Cotton, and Synthetic yarns in various colors and weights.
           </p>
         </div>
 
-        {/* Controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 space-y-4 sm:space-y-0">
-          {/* Filter Toggle */}
-          <div className="flex items-center space-x-4">
+        {/* Controls - Mobile Optimized */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8 space-y-3 sm:space-y-0">
+          {/* Filter Toggle - Touch Friendly */}
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors duration-200"
+              className="flex items-center space-x-2 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 active:bg-gray-300 dark:active:bg-gray-500 rounded-xl transition-colors duration-200"
             >
               <Filter className="h-5 w-5" />
-              <span>Filters</span>
+              <span className="text-sm sm:text-base">Filters</span>
             </button>
-            
-            {isOwner && (
-              <button
-                onClick={() => setShowAddModal(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-silk-600 text-white hover:bg-silk-700 rounded-lg transition-colors duration-200"
-              >
-                <Plus className="h-5 w-5" />
-                <span>Add Thread</span>
-              </button>
-            )}
           </div>
 
-          {/* View Mode Toggle */}
-          <div className="flex items-center space-x-2">
+          {/* View Mode Toggle - Touch Optimized */}
+          <div className="flex items-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-xl p-1">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-lg transition-colors duration-200 ${
+              className={`p-3 rounded-lg transition-colors duration-200 ${
                 viewMode === 'grid' 
-                  ? 'bg-silk-600 text-white' 
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-silk-600 text-white shadow-sm' 
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <Grid className="h-5 w-5" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-lg transition-colors duration-200 ${
+              className={`p-3 rounded-lg transition-colors duration-200 ${
                 viewMode === 'list' 
-                  ? 'bg-silk-600 text-white' 
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-silk-600 text-white shadow-sm' 
+                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               <List className="h-5 w-5" />
@@ -107,9 +77,9 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           </div>
         </div>
 
-        {/* Filters */}
+        {/* Filters - Mobile Optimized */}
         {showFilters && (
-          <div className="mb-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-xl transition-colors duration-300">
+          <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl transition-colors duration-300">
             <ThreadFilter
               categories={categories}
               colors={colors}
@@ -118,21 +88,17 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
           </div>
         )}
 
-        {/* Threads Grid/List */}
+        {/* Threads Grid/List - Mobile First */}
         {threads.length > 0 ? (
           <div className={
             viewMode === 'grid' 
-              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'
-              : 'space-y-6'
+              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'
+              : 'space-y-4 sm:space-y-6'
           }>
             {threads.map((thread) => (
               <ThreadCard
                 key={thread.id}
                 thread={thread}
-                isOwner={isOwner}
-                onUpdateThread={onUpdateThread}
-                onDeleteThread={onDeleteThread}
-                onToggleStatus={onToggleStatus}
                 onAddPreorder={onAddPreorder}
                 viewMode={viewMode}
               />
@@ -149,22 +115,15 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
         )}
 
         {/* Load More Button */}
-        {threads.length > 0 && !isOwner && (
+        {threads.length > 0 && (
           <div className="text-center mt-12">
             <button className="btn-primary px-8 py-3">
-              Load More Threads
+              Load More Products
             </button>
           </div>
         )}
       </div>
 
-      {/* Add Thread Modal */}
-      {showAddModal && (
-        <AddThreadModal
-          onClose={() => setShowAddModal(false)}
-          onAddThread={onAddThread}
-        />
-      )}
     </section>
   );
 };

@@ -17,32 +17,33 @@ const Hero: React.FC = () => {
         <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-silk-300 dark:via-silk-600 to-transparent opacity-30"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 xl:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Content - Mobile First */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center px-4 py-2 bg-silk-100 dark:bg-silk-900 text-silk-700 dark:text-silk-300 rounded-full text-sm font-medium mb-6">
-              <Globe className="h-4 w-4 mr-2" />
-              Shri Ganpati Silk Industries
+            <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-silk-100 dark:bg-silk-900 text-silk-700 dark:text-silk-300 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <Globe className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Shri Ganpati Silk Industries</span>
+              <span className="sm:hidden">SG Silk Industries</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-6 leading-tight">
               Premium <span className="text-silk-600 dark:text-silk-400">Silk Yarn</span><br />
               <span className="text-gold-600 dark:text-gold-400">Poly, Zari & Cotton</span>
             </h1>
             
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
               We specialize in high-quality Silkyarn, Poly, Yarn, Zari, and Cottonyarn. 
               Located in Champa, Chhattisgarh, we provide premium textile materials 
               for weaving, embroidery, and manufacturing needs.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
-              <button className="btn-primary text-lg px-8 py-4 flex items-center justify-center group">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12">
+              <button className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 flex items-center justify-center group">
                 Explore Our Collection
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="btn-secondary text-lg px-8 py-4">
+              <button className="btn-secondary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
                 Request Bulk Quote
               </button>
             </div>

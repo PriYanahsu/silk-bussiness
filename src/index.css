@@ -11,6 +11,22 @@
     @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-body;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     font-variant-numeric: oldstyle-nums;
+    /* Mobile optimizations */
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Allow text selection for form inputs and content */
+  input, textarea, [contenteditable] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -43,11 +59,17 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-silk-600 hover:bg-silk-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-silk-500 focus:ring-offset-2;
+    @apply bg-silk-600 hover:bg-silk-700 active:bg-silk-800 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-silk-500 focus:ring-offset-2;
+    /* Mobile touch optimizations */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   
   .btn-secondary {
-    @apply bg-gold-500 hover:bg-gold-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2;
+    @apply bg-gold-500 hover:bg-gold-600 active:bg-gold-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2;
+    /* Mobile touch optimizations */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
   
   .card {
@@ -124,6 +146,24 @@
     border-top: 2px solid #ed7c3f;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+  }
+  
+  /* Mobile-specific utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+  
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
