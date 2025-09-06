@@ -23,18 +23,18 @@ const Hero: React.FC = () => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center px-4 py-2 bg-silk-100 dark:bg-silk-900 text-silk-700 dark:text-silk-300 rounded-full text-sm font-medium mb-6">
               <Globe className="h-4 w-4 mr-2" />
-              Premium Silk Thread Importers
+              Shri Ganpati Silk Industries
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-gray-900 dark:text-gray-100 mb-6">
-              World-Class <span className="text-silk-600 dark:text-silk-400">Silk Threads</span><br />
-              <span className="text-gold-600 dark:text-gold-400">Direct from Origin</span>
+              Premium <span className="text-silk-600 dark:text-silk-400">Silk Yarn</span><br />
+              <span className="text-gold-600 dark:text-gold-400">Poly, Zari & Cotton</span>
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed max-w-2xl">
-              We are specialized importers of premium silk threads, bringing you the finest quality 
-              Mulberry, Tussar, Eri, and Muga silk threads directly from their countries of origin. 
-              Trusted by artisans and manufacturers worldwide.
+              We specialize in high-quality Silkyarn, Poly, Yarn, Zari, and Cottonyarn. 
+              Located in Champa, Chhattisgarh, we provide premium textile materials 
+              for weaving, embroidery, and manufacturing needs.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">

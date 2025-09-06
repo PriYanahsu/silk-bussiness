@@ -6,7 +6,7 @@ export interface SilkThread {
   originalPrice?: number;
   image: string;
   images: string[];
-  category: 'mulberry' | 'tussar' | 'eri' | 'muga' | 'raw' | 'dyed' | 'specialty';
+  category: 'silkyarn' | 'poly' | 'yarn' | 'zari' | 'cottonyarn' | 'raw' | 'dyed' | 'specialty';
   color: string;
   weight: string; // e.g., "20/22", "13/15", "8/10"
   origin: string; // e.g., "Karnataka", "West Bengal", "Assam"

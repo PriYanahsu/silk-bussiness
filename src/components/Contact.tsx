@@ -60,25 +60,25 @@ const Contact: React.FC<ContactProps> = ({ onAddPreorder }) => {
     {
       icon: Phone,
       title: 'Phone',
-      details: ['+91 98765 43210', '+91 98765 43211'],
+      details: ['+91 7000018326', '+91 8817715710'],
       description: 'Call us for immediate assistance'
     },
     {
       icon: Mail,
       title: 'Email',
-      details: ['info@silk-elegance.com', 'orders@silk-elegance.com'],
+      details: ['singhpankaj445500@gmail.com'],
       description: 'Send us an email anytime'
     },
     {
       icon: MapPin,
       title: 'Address',
-      details: ['123 Silk Street, Textile District', 'Mumbai, Maharashtra 400001'],
-      description: 'Visit our showroom'
+      details: ['Sitaram Gali, Manjhali Talab', 'Champa 495 671, Distt. Janjgir-Champa (Chhattisgarh)'],
+      description: 'Visit our location'
     },
     {
       icon: Clock,
       title: 'Business Hours',
-      details: ['Mon - Sat: 10:00 AM - 8:00 PM', 'Sunday: 11:00 AM - 6:00 PM'],
+      details: ['Mon - Sat: 9:00 AM - 7:00 PM', 'Sunday: 10:00 AM - 5:00 PM'],
       description: 'We are here to help you'
     }
   ];
@@ -130,12 +130,40 @@ const Contact: React.FC<ContactProps> = ({ onAddPreorder }) => {
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-gray-200 rounded-xl h-64 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="h-12 w-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-600">Interactive Map</p>
-                <p className="text-sm text-gray-500">Click to view our location</p>
+            {/* Google Maps Embed */}
+            <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+              <iframe
+                src="https://maps.google.com/maps?q=Champa,+Chhattisgarh+495671&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="256"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Shri Ganpati Silk Industries Location - Champa, Chhattisgarh"
+                className="w-full h-64"
+              ></iframe>
+              <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="h-5 w-5 text-silk-600" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Sitaram Gali, Manjhali Talab, Champa, Chhattisgarh 495671
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Click on the map to open in Google Maps for directions
+                </p>
+                <div className="mt-2">
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Sitaram+Gali+Manjhali+Talab+Champa+Chhattisgarh+495671"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs text-silk-600 hover:text-silk-700 dark:text-silk-400 dark:hover:text-silk-300 transition-colors duration-200"
+                  >
+                    <MapPin className="h-3 w-3 mr-1" />
+                    Get Directions
+                  </a>
+                </div>
               </div>
             </div>
           </div>

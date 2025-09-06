@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({
 
   const navigation = [
     { name: 'Home', href: '#home' },
-    { name: 'Silk Threads', href: '#products' },
+    { name: 'Products', href: '#products' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
           {/* Logo */}
           <div className="flex-shrink-0">
             <h1 className="text-2xl font-serif font-bold text-silk-600 dark:text-silk-400">
-              Silk Thread Hub
+              Shri Ganpati Silk Industries
             </h1>
           </div>
 

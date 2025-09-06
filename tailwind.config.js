@@ -34,8 +34,9 @@ export default {
         }
       },
       fontFamily: {
-        'serif': ['Playfair Display', 'serif'],
-        'sans': ['Inter', 'sans-serif'],
+        'sans': ['Inter', 'Poppins', 'system-ui', 'sans-serif'],
+        'display': ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        'body': ['Inter', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

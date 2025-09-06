@@ -11,10 +11,10 @@ const Footer: React.FC = () => {
       { name: 'Press', href: '#' },
     ],
     products: [
-      { name: 'Sarees', href: '#products' },
-      { name: 'Dresses', href: '#products' },
-      { name: 'Scarves', href: '#products' },
-      { name: 'Fabrics', href: '#products' },
+      { name: 'Silkyarn', href: '#products' },
+      { name: 'Poly Yarn', href: '#products' },
+      { name: 'Zari', href: '#products' },
+      { name: 'Cottonyarn', href: '#products' },
     ],
     support: [
       { name: 'Contact Us', href: '#contact' },
@@ -44,27 +44,31 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <h3 className="text-2xl font-serif font-bold text-silk-400 mb-4">
-              Silk Thread Hub
+              Shri Ganpati Silk Industries
             </h3>
             <p className="text-gray-300 dark:text-gray-400 mb-6 leading-relaxed">
-              Your premier destination for authentic silk products. We bring you the finest 
-              collection of handwoven silk sarees, dresses, and accessories, crafted with 
-              traditional techniques and modern elegance.
+              Shri Ganpati Silk Industries specializes in high-quality Silkyarn, Poly, Yarn, 
+              Zari, and Cottonyarn. Located in Champa, Chhattisgarh, we provide premium 
+              textile materials for all your weaving and manufacturing needs.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-silk-400" />
-                <span className="text-gray-300 dark:text-gray-400">+91 98765 43210</span>
+                <span className="text-gray-300 dark:text-gray-400">+91 7000018326</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-silk-400" />
+                <span className="text-gray-300 dark:text-gray-400">+91 8817715710</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-silk-400" />
-                <span className="text-gray-300 dark:text-gray-400">info@silk-elegance.com</span>
+                <span className="text-gray-300 dark:text-gray-400">singhpankaj445500@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-silk-400" />
-                <span className="text-gray-300 dark:text-gray-400">123 Silk Street, Mumbai</span>
+                <span className="text-gray-300 dark:text-gray-400">Sitaram Gali, Manjhali Talab, Champa</span>
               </div>
             </div>
 
@@ -174,7 +178,7 @@ const Footer: React.FC = () => {
         <div className="mt-8 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm">
-              © {currentYear} Silk Elegance. All rights reserved.
+              © {currentYear} Shri Ganpati Silk Industries. All rights reserved.
             </div>
             <div className="flex items-center space-x-1 text-gray-400 text-sm">
               <span>Made with</span>
