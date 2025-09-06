@@ -5,10 +5,9 @@ import type { SilkThread } from '../types';
 interface PreorderModalProps {
   thread: SilkThread;
   onClose: () => void;
-  onAddPreorder: (preorderData: any) => void;
 }
 
-const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPreorder }) => {
+const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
@@ -25,19 +24,35 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Get current user info if logged in (static site - no user system)
-    const currentUser = null;
-    
-    onAddPreorder({
-      productId: thread.id,
-      productName: thread.name,
-      quantity: quantity,
-      message: customerInfo.message || `Preorder for ${thread.name}`,
-    });
-    
+  const handleWhatsAppOrder = () => {
+    const phoneNumber = "917007836367"; // ✅ Your WhatsApp number in international format
+
+    const text = `
+🧵 Preorder Request
+--------------------
+📌 Product: ${thread.name}
+📦 Quantity: ${quantity}
+
+👤 Customer: ${customerInfo.name}
+📧 Email: ${customerInfo.email}
+📞 Phone: ${customerInfo.phone}
+
+📝 Note: ${customerInfo.message || "N/A"}
+    `;
+
+    const encodedText = encodeURIComponent(text);
+
+    // ✅ Detect if user is on mobile
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    const url = isMobile
+      ? `whatsapp://send?phone=${phoneNumber}&text=${encodedText}` // open WhatsApp app
+      : `https://wa.me/${phoneNumber}?text=${encodedText}`;       // open WhatsApp Web
+
+    // ✅ Open WhatsApp
+    window.open(url, "_blank");
+
+    // ✅ Close modal
     onClose();
   };
 
@@ -81,109 +96,85 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
 
             {/* Order Form */}
             <div className="space-y-4">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Quantity Selector */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Quantity
-                  </label>
-                  <div className="flex items-center space-x-3">
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                    >
-                      <Minus className="h-4 w-4" />
-                    </button>
-                    <span className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 min-w-[60px] text-center">
-                      {quantity}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setQuantity(Math.min(thread.stockQuantity, quantity + 1))}
-                      className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                    >
-                      <Plus className="h-4 w-4" />
-                    </button>
-                  </div>
+              {/* Quantity Selector */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Quantity
+                </label>
+                <div className="flex items-center space-x-3">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </button>
+                  <span className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 min-w-[60px] text-center">
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity(Math.min(thread.stockQuantity, quantity + 1))}
+                    className="p-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </button>
                 </div>
+              </div>
 
-                {/* Customer Information */}
-                <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 flex items-center">
-                    <User className="h-5 w-5 mr-2 text-silk-600 dark:text-silk-400" />
-                    Customer Information
-                  </h4>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={customerInfo.name}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-silk-500 focus:border-transparent"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
+              {/* Customer Info */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 flex items-center">
+                  <User className="h-5 w-5 mr-2 text-silk-600 dark:text-silk-400" />
+                  Customer Information
+                </h4>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={customerInfo.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-silk-500 focus:border-transparent"
-                      placeholder="Enter your email"
-                    />
-                  </div>
+                <input
+                  type="text"
+                  name="name"
+                  value={customerInfo.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  placeholder="Full Name"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={customerInfo.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  placeholder="Email Address"
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  value={customerInfo.phone}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  placeholder="Phone Number"
+                />
+                <textarea
+                  name="message"
+                  value={customerInfo.message}
+                  onChange={handleInputChange}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg resize-none"
+                  placeholder="Any special requirements or notes..."
+                />
+              </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={customerInfo.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-silk-500 focus:border-transparent"
-                      placeholder="Enter your phone number"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Additional Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={customerInfo.message}
-                      onChange={handleInputChange}
-                      rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-silk-500 focus:border-transparent resize-none"
-                      placeholder="Any special requirements or notes..."
-                    />
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-silk-600 hover:bg-silk-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                >
-                  <ShoppingCart className="h-5 w-5 mr-2" />
-                  Place Preorder
-                </button>
-              </form>
+              {/* WhatsApp Button */}
+              <button
+                type="button"
+                onClick={handleWhatsAppOrder}
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center"
+              >
+                <ShoppingCart className="h-5 w-5 mr-2" />
+                Send Preorder via WhatsApp
+              </button>
             </div>
           </div>
         </div>
