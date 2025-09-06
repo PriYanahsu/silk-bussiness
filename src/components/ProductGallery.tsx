@@ -92,7 +92,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
         {threads.length > 0 ? (
           <div className={
             viewMode === 'grid' 
-              ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'
+              ? 'grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6'
               : 'space-y-4 sm:space-y-6'
           }>
             {threads.map((thread) => (

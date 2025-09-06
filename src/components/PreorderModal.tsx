@@ -34,17 +34,12 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
     onAddPreorder({
       productId: thread.id,
       productName: thread.name,
-      customerName: customerInfo.name || currentUser?.username || 'Guest User',
-      customerEmail: customerInfo.email || currentUser?.email || 'guest@example.com',
-      customerPhone: customerInfo.phone || currentUser?.phone || 'Not provided',
       quantity: quantity,
       message: customerInfo.message || `Preorder for ${thread.name}`,
     });
     
     onClose();
   };
-
-  const totalPrice = thread.price * quantity;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -78,20 +73,8 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
                   {thread.description}
                 </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xl font-bold text-silk-600 dark:text-silk-400">
-                      ₹{thread.price.toLocaleString()}
-                    </span>
-                    {thread.originalPrice && thread.originalPrice > thread.price && (
-                      <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
-                        ₹{thread.originalPrice?.toLocaleString()}
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-300">
-                    Stock: {thread.stockQuantity}
-                  </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">
+                  Stock: {thread.stockQuantity}
                 </div>
               </div>
             </div>
@@ -189,31 +172,6 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose, onAddPre
                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-silk-500 focus:border-transparent resize-none"
                       placeholder="Any special requirements or notes..."
                     />
-                  </div>
-                </div>
-
-                {/* Order Summary */}
-                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                  <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3">
-                    Order Summary
-                  </h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600 dark:text-gray-300">
-                        {thread.name} × {quantity}
-                      </span>
-                      <span className="text-gray-900 dark:text-gray-100">
-                        ₹{(thread.price * quantity).toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="border-t border-gray-200 dark:border-gray-600 pt-2">
-                      <div className="flex justify-between font-semibold">
-                        <span className="text-gray-900 dark:text-gray-100">Total</span>
-                        <span className="text-silk-600 dark:text-silk-400">
-                          ₹{totalPrice.toLocaleString()}
-                        </span>
-                      </div>
-                    </div>
                   </div>
                 </div>
 

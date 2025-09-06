@@ -1,5 +1,6 @@
 import { Award, Users, Globe, Package, Shield, Truck } from 'lucide-react';
 import Pankaj from '../assets/Owner.jpg';
+import godown from '../assets/godown.png';
 
 const About: React.FC = () => {
   const stats = [
@@ -86,7 +87,7 @@ const About: React.FC = () => {
             {/* Main Image */}
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=400&fit=crop"
+                src={godown}
                 alt="Premium Silk Thread Manufacturing"
                 className="w-full h-80 object-cover rounded-2xl shadow-xl border-4 border-white dark:border-gray-700"
               />

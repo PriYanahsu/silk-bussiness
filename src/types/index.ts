@@ -6,7 +6,7 @@ export interface SilkThread {
   originalPrice?: number;
   image: string;
   images: string[];
-  category: 'raw-silk' | 'ghicha-tusser-yarn' | 'polyester-yarn' | 'cotton-yarn' | 'synthetics-yarn';
+  category: 'china-tusser-yarn' | 'ghicha-tusser-yarn' | 'pure-polyester-yarn' | 'pure-cotton-yarn' | 'emitation-jari' | 'Tusser-fabrics-and-saree';
   color: string;
   weight: string; // e.g., "20/22", "13/15", "8/10"
   origin: string; // e.g., "Karnataka", "West Bengal", "Assam"

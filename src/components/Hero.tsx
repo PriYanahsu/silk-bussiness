@@ -1,4 +1,5 @@
 import { ArrowRight, Star, Shield, Globe, Award, Package } from 'lucide-react';
+import Office from '../assets/Office.jpg';
 
 const Hero: React.FC = () => {
   return (
@@ -86,7 +87,7 @@ const Hero: React.FC = () => {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=800&fit=crop"
+                src={Office}
                 alt="Premium Silk Thread Collection"
                 className="w-full h-96 lg:h-[600px] object-cover rounded-2xl shadow-2xl border-4 border-white dark:border-gray-700"
               />
