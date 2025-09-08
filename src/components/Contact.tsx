@@ -6,7 +6,7 @@ interface ContactProps {
   onAddPreorder: (preorderData: any) => void;
 }
 
-const Contact: React.FC<ContactProps> = ({ onAddPreorder }) => {
+const Contact: React.FC<ContactProps> = ({}) => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Heart,
+  // Heart,
   MessageCircle,
   Star,
   CheckCircle,
@@ -20,10 +20,10 @@ interface ThreadCardProps {
 
 const ThreadCard: React.FC<ThreadCardProps> = ({
   thread,
-  onAddPreorder,
+  // onAddPreorder,
   viewMode
 }) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  // const [isWishlisted, setIsWishlisted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showPreorderModal, setShowPreorderModal] = useState(false);
   const [zoomed, setZoomed] = useState(false); // For image zoom modal
@@ -32,9 +32,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({
     setShowPreorderModal(true);
   };
 
-  const toggleWishlist = () => {
-    setIsWishlisted(!isWishlisted);
-  };
+  // const toggleWishlist = () => {
+  //   setIsWishlisted(!isWishlisted);
+  // };
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % thread.images.length);

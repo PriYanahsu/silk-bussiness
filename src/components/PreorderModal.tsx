@@ -25,7 +25,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
   };
 
   const handleWhatsAppOrder = () => {
-    const phoneNumber = "917007836367"; // ✅ Your WhatsApp number in international format
+    const phoneNumber = "917007836367"; // Your WhatsApp number in international format
 
     const text = `
 🧵 Preorder Request
@@ -42,17 +42,16 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
 
     const encodedText = encodeURIComponent(text);
 
-    // ✅ Detect if user is on mobile
+    // Detect if user is on mobile
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
     const url = isMobile
       ? `whatsapp://send?phone=${phoneNumber}&text=${encodedText}` // open WhatsApp app
       : `https://wa.me/${phoneNumber}?text=${encodedText}`;       // open WhatsApp Web
 
-    // ✅ Open WhatsApp
+    // Open WhatsApp
     window.open(url, "_blank");
 
-    // ✅ Close modal
     onClose();
   };
 
