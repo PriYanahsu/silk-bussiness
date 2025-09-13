@@ -25,7 +25,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
   };
 
   const handleWhatsAppOrder = () => {
-    const phoneNumber = "917007836367"; // Your WhatsApp number in international format
+    const phoneNumber = "917000018326"; // Your WhatsApp number in international format
 
     const text = `
 🧵 Preorder Request
