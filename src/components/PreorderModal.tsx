@@ -134,7 +134,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
                   value={customerInfo.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  className="w-full px-3 py-2 border text-black border-gray-300 dark:border-gray-600 rounded-lg"
                   placeholder="Full Name"
                 />
                 <input
@@ -143,7 +143,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
                   value={customerInfo.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  className="w-full px-3 py-2 border text-black border-gray-300 dark:border-gray-600 rounded-lg"
                   placeholder="Email Address"
                 />
                 <input
@@ -152,7 +152,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
                   value={customerInfo.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg"
+                  className="w-full px-3 py-2 border text-black border-gray-300 dark:border-gray-600 rounded-lg"
                   placeholder="Phone Number"
                 />
                 <textarea
@@ -160,7 +160,7 @@ const PreorderModal: React.FC<PreorderModalProps> = ({ thread, onClose }) => {
                   value={customerInfo.message}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg resize-none"
+                  className="w-full px-3 py-2 border text-black border-gray-300 dark:border-gray-600 rounded-lg resize-none"
                   placeholder="Any special requirements or notes..."
                 />
               </div>
